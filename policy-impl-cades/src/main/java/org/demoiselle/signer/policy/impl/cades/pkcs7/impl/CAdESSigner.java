@@ -270,6 +270,7 @@ public class CAdESSigner implements PKCS7Signer {
 
 	private byte[] doSign(byte[] content, byte[] previewSignature) {
 		try {
+			// FIXME should we centralize in core the configuration or even cryptography
 			Security.addProvider(new BouncyCastleProvider());
 			if (this.certificateChain == null) {
 				logger.error(cadesMessagesBundle.getString("error.certificate.null"));

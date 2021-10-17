@@ -55,28 +55,28 @@ public interface Signer {
 	void setProvider(Provider provider);
 
 	/**
-	 * Private key required for asymmetric cryptography
+	 * Private key required for asymmetric cryptography.
 	 *
 	 * @param privateKey private key to be used
 	 */
 	void setPrivateKey(PrivateKey privateKey);
 
 	/**
-	 * Public key needed for asymmetric cryptography
+	 * Public key needed for asymmetric cryptography.
 	 *
-	 * @param publicKey public key to be used
+	 * @param publicKey public key to be used.
 	 */
 	void setPublicKey(PublicKey publicKey);
 
 	/**
-	 * Set a Signature Algorithm. Ex: SHA256withRSA
+	 * Set a signature algorithm for exemple SHA256withRSA.
 	 *
-	 * @param algorithm algorithm to be used
+	 * @param algorithm algorithm to be used.
 	 */
 	void setAlgorithm(String algorithm);
 
 	/**
-	 * Set an algorithm pre-defined in enumeration. Compatible with ICP-Brasil
+	 * Set an algorithm compatible with ICP-Brasil.
 	 *
 	 * @param algorithm algorithm representation to be used
 	 */

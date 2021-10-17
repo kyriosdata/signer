@@ -40,7 +40,12 @@ package org.demoiselle.signer.policy.impl.cades;
 import org.demoiselle.signer.cryptography.DigestAlgorithmEnum;
 
 /**
- * Enumeration for suported Algorrithm
+ * Enumeration for suported Algorrithm.
+ *
+ * <p>We can check OIDs using services like
+ * <a href="https://oid-info.com/">OID Repository</a>.</p>
+ *
+ * @see DigestAlgorithmEnum
  */
 public enum SignerAlgorithmEnum {
 
@@ -50,12 +55,41 @@ public enum SignerAlgorithmEnum {
 	 * 1.2.840.113549.2.5 DSA = 1.2.840.10040.4.3 RSA = 1.2.840.113549.1.1.1
 	 * ECDSA = 1.0.14888.3.0.4
 	 */
-	SHA1withDSA("SHA1withDSA", DigestAlgorithmEnum.SHA_1.getAlgorithm(), "1.3.14.3.2.26", "DSA", "1.2.840.10040.4.3"),
-	SHA1withRSA("SHA1withRSA", DigestAlgorithmEnum.SHA_1.getAlgorithm(), "1.3.14.3.2.26", "RSA", "1.2.840.113549.1.1.1"),
-	SHA256withRSA("SHA256withRSA", DigestAlgorithmEnum.SHA_256.getAlgorithm(), "2.16.840.1.101.3.4.2.1", "RSA", "1.2.840.113549.1.1.1"),
-	SHA256withECDSA("SHA256withECDSA", DigestAlgorithmEnum.SHA_256.getAlgorithm(), "2.16.840.1.101.3.4.2.1", "ECDSA", "1.0.14888.3.0.4"),
-	SHA512withRSA("SHA512withRSA", DigestAlgorithmEnum.SHA_512.getAlgorithm(), "2.16.840.1.101.3.4.2.3", "RSA", "1.2.840.113549.1.1.1"),
-	SHA512withECDSA("SHA512withECDSA", DigestAlgorithmEnum.SHA_512.getAlgorithm(), "2.16.840.1.101.3.4.2.3", "ECDSA", "1.0.14888.3.0.4");
+	SHA1withDSA("SHA1withDSA",
+		DigestAlgorithmEnum.SHA_1.getAlgorithm(),
+		"1.3.14.3.2.26",
+		"DSA",
+		"1.2.840.10040.4.3"),
+
+	SHA1withRSA("SHA1withRSA",
+		DigestAlgorithmEnum.SHA_1.getAlgorithm(),
+		"1.3.14.3.2.26",
+		"RSA",
+		"1.2.840.113549.1.1.1"),
+
+	SHA256withRSA("SHA256withRSA",
+		DigestAlgorithmEnum.SHA_256.getAlgorithm(),
+		"2.16.840.1.101.3.4.2.1",
+		"RSA",
+		"1.2.840.113549.1.1.1"),
+
+	SHA256withECDSA("SHA256withECDSA",
+		DigestAlgorithmEnum.SHA_256.getAlgorithm(),
+		"2.16.840.1.101.3.4.2.1",
+		"ECDSA",
+		"1.0.14888.3.0.4"),
+
+	SHA512withRSA("SHA512withRSA",
+		DigestAlgorithmEnum.SHA_512.getAlgorithm(),
+		"2.16.840.1.101.3.4.2.3",
+		"RSA",
+		"1.2.840.113549.1.1.1"),
+
+	SHA512withECDSA("SHA512withECDSA",
+		DigestAlgorithmEnum.SHA_512.getAlgorithm(),
+		"2.16.840.1.101.3.4.2.3",
+		"ECDSA",
+		"1.0.14888.3.0.4");
 
 	/**
 	 * Definition of standard algorithm.

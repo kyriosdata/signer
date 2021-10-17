@@ -35,57 +35,39 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-package org.demoiselle.signer.cryptography;
+package org.demoiselle.signer.policy.impl.cades.pkcs7.impl;
 
-/**
- * FIXME maybe a better name is just DigestAlgorithm
- * FIXME remove hash functions not used by ICP-Brasil?
- * Defines the digest algorithms according to the standard defined
- * by the Brazilian public key infrastructure (ICP-Brasil).
- *
- * <p>According to <a href="Padrões e Algoritmos Criptográficos da ICP-Brasil">ICP-Brasil</a>,
- * the algoritms used for hash are: SHA-1, SHA-256, SHA-512 and SHAKE-256.</p>
- */
-public enum DigestAlgorithmEnum {
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.junit.Test;
+import sun.security.mscapi.SunMSCAPI;
 
-	MD5("MD5"),
-	SHA_1("SHA-1"),
-	SHA_224("SHA224"),
-	SHA_256("SHA-256"),
-	SHA_384("SHA384"),
-	SHA_512("SHA-512"),
-	SHA3_224("SHA3-224"),
-	SHA3_256("SHA3-256"),
-	SHA3_384("SHA3-384"),
-	SHA3_512("SHA3-512"),
-	SHAKE_128("SHAKE128"),
-	SHAKE_256("SHAKE256");
+import java.security.Provider;
+import java.security.Security;
 
-	public static DigestAlgorithmEnum DEFAULT = DigestAlgorithmEnum.SHA_256;
+import static junit.framework.TestCase.assertNotNull;
 
-	private String algorithm;
+public class ProviderTest {
 
-	DigestAlgorithmEnum(String algorithm) {
-		this.algorithm = algorithm;
+	@Test
+	public void sunMSCapiIsProvidedByDefault() {
+		// Security.addProvider(new SunMSCAPI());
+		Provider get = Security.getProvider("SunMSCAPI");
+		assertNotNull(get);
 	}
 
-	public String getAlgorithm() {
-		return this.algorithm;
+	@Test
+	public void addProviderOnlyWithNotAlreadAvailable() {
+		Provider get = Security.getProvider("SUN");
+		assertNotNull(get);
+		// Security.addProvider(...)
 	}
 
-	/**
-	 * Retrieves an enumeration item that matches the passed parameter.
-	 * The passed parameter must be equal (case insensitive)
-	 * to the algorithm name of any item in this enumeration, otherwise it will return null.
-	 *
-	 * @param algorithm algorithm name.
-	 * @return algorithm representation
-	 */
-	public static DigestAlgorithmEnum getDigestAlgorithmEnum(String algorithm) {
-		for (DigestAlgorithmEnum value : DigestAlgorithmEnum.values())
-			if (value.getAlgorithm().equalsIgnoreCase(algorithm))
-				return value;
-		return null;
+	@Test
+	public void weShouldCheckForExceptionWhenAddProvider() {
+		try {
+			Security.addProvider(new BouncyCastleProvider());
+		} catch (SecurityException exp) {
+			// Can be thrown
+		}
 	}
-
 }
