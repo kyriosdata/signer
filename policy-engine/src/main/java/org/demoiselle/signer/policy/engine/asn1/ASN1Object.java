@@ -101,7 +101,7 @@ public abstract class ASN1Object {
 	}
 
 	/**
-	 * @param derObject ASN1 Primitive to parse
+	 * @param derObject ASN1 Primitive to parse.
 	 */
 	public void parse(ASN1Primitive derObject) {
 		System.out.println(this.getClass() + policyMessagesBundle.getString("info.not.implemented"));
