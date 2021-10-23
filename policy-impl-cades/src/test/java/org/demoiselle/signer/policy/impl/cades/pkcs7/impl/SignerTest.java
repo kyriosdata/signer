@@ -48,11 +48,14 @@ import org.demoiselle.signer.policy.impl.cades.SignerAlgorithmEnum;
 import org.demoiselle.signer.policy.impl.cades.factory.PKCS7Factory;
 import org.demoiselle.signer.policy.impl.cades.pkcs7.PKCS7Signer;
 import org.demoiselle.signer.timestamp.configuration.TimeStampConfig;
+import org.junit.Test;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.KeyStore.Builder;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
 import java.util.Enumeration;
 
 import static org.junit.Assert.assertTrue;
@@ -79,14 +82,17 @@ public class SignerTest {
 			//String pkcs11LibraryPath =	 "/usr/lib/watchdata/ICP/lib/libwdpkcs_icp.so";
 
 			// Para TOKEN Azul a linha abaixo
-			String pkcs11LibraryPath = "/usr/lib/libeToken.so";
+//			String pkcs11LibraryPath = "/usr/lib/libeToken.so";
+//
+//			StringBuilder buf = new StringBuilder();
+//			buf.append("library = ").append(pkcs11LibraryPath).append("\nname = Provedor\n");
+//			ByteArrayInputStream configStream = new ByteArrayInputStream(buf.toString().getBytes());
+//			Provider p = new sun.security.pkcs11.SunPKCS11(configStream);
+//			Security.addProvider(p);
 
-			StringBuilder buf = new StringBuilder();
-			buf.append("library = ").append(pkcs11LibraryPath).append("\nname = Provedor\n");
-			Provider p = new sun.security.pkcs11.SunPKCS11(new ByteArrayInputStream(buf.toString().getBytes()));
-			Security.addProvider(p);
 			// ATENÇÃO ALTERAR "SENHA" ABAIXO
-			Builder builder = Builder.newInstance("PKCS11", p, new KeyStore.PasswordProtection("senha".toCharArray()));
+			Builder builder = Builder.newInstance("JKS", null,
+				new KeyStore.PasswordProtection("senha".toCharArray()));
 			KeyStore ks;
 			ks = builder.getKeyStore();
 
@@ -398,26 +404,29 @@ public class SignerTest {
 	/**
 	 * Teste com conteúdo anexado
 	 */
-	//@Test
+	@Test
 	public void testSignAttached() {
 		try {
-
-			System.out.println("******** TESTANDO COM CONTEÚDO ATACHADO*****************");
-
 			// INFORMAR o arquivo
-			String fileDirName = "/";
+			String fileDirName = "./";
 
-
-			byte[] fileToSign = readContent(fileDirName);
+			// byte[] fileToSign = readContent(fileDirName);
+			byte[] fileToSign = "saúde".getBytes(StandardCharsets.UTF_8);
 
 			// quando certificado em arquivo, precisa informar a senha
-			char[] senha = "senha".toCharArray();
+			char[] senha = "changeit".toCharArray();
 
 			// Para certificado em Token
-			//KeyStore ks = getKeyStoreToken();
+//			KeyStore ks = getKeyStoreToken();
+
+			KeyStore ks = KeyStore.getInstance("JKS");
+
+			InputStream is = this.getClass().getResourceAsStream("/icpbrasil.jks");
+
+			ks.load(is, senha);
 
 			// Para certificado NeoID e windows token
-			KeyStore ks = getKeyStoreTokenBySigner();
+			// KeyStore ks = getKeyStoreTokenBySigner();
 
 
 			// Para certificado em arquivo A1
@@ -462,7 +471,7 @@ public class SignerTest {
 			os.flush();
 			os.close();
 			assertTrue(true);
-		} catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException | IOException ex) {
+		} catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException | IOException | CertificateException ex) {
 			ex.printStackTrace();
 			assertTrue(false);
 		}
