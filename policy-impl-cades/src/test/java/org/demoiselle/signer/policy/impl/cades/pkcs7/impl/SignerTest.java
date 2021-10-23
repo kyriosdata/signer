@@ -71,7 +71,9 @@ public class SignerTest {
 			char[] senha = SENHA.toCharArray();
 
 			KeyStore ks = KeyStore.getInstance("JKS");
-			InputStream is = this.getClass().getResourceAsStream("/icpbrasil.jks");
+
+			String certificadoFile = System.getenv("RNDS_CERTIFICADO_ENDERECO");
+			InputStream is = new FileInputStream(certificadoFile);
 			ks.load(is, senha);
 
 			String alias = getAlias(ks);
@@ -80,7 +82,7 @@ public class SignerTest {
 			signer.setCertificates(ks.getCertificateChain(alias));
 
 			// para token
-			signer.setPrivateKey((PrivateKey) ks.getKey(alias, null));
+			signer.setPrivateKey((PrivateKey) ks.getKey(alias, SENHA.toCharArray()));
 
 			// para arquivo
 			// signer.setPrivateKey((PrivateKey) ks.getKey(alias, senha));

@@ -34,6 +34,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+
 package org.demoiselle.signer.core.validator;
 
 import java.security.cert.X509Certificate;
@@ -49,6 +50,11 @@ import org.demoiselle.signer.core.util.MessagesBundle;
 
 /**
  * to verify if a certificate is Repealed.
+ *
+ * <p>A certificate revocation list (CRL) is a list of
+ * digital certificates that have been revoked by the
+ * issuing certificate authority (CA) before their actual
+ * or assigned expiration date.</p>
  */
 public class CRLValidator implements IValidator {
 
