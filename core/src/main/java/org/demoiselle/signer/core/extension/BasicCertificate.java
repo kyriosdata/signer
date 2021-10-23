@@ -71,7 +71,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Basic Certificate information based on ICP-BRASIL (PKI) definitions
+ * Basic Certificate information based on ICP-BRASIL (PKI) definitions.
  */
 public class BasicCertificate {
 
@@ -312,9 +312,8 @@ public class BasicCertificate {
 
 	/**
 	 * Returns the email address that was defined on
-	 * SubjectAlternativeNames.<br>
-	 * Similar getICPBRSubjectAlternativeNames().getEmail()<br>
-	 * If not exists, returns <b>null</b>.<br>
+	 * SubjectAlternativeNames or {@code null},
+	 * if not exists.<br>
 	 *
 	 * @return String email
 	 */

@@ -60,7 +60,7 @@ import static org.junit.Assert.assertTrue;
 /**
  *
  */
-public class CAdESSignerTest {
+public class SignerTest {
 
 	// A anotação @Test está comentada, para passar o buld, pois as
 	// configurações dependem de parâmetros
@@ -86,7 +86,7 @@ public class CAdESSignerTest {
 			Provider p = new sun.security.pkcs11.SunPKCS11(new ByteArrayInputStream(buf.toString().getBytes()));
 			Security.addProvider(p);
 			// ATENÇÃO ALTERAR "SENHA" ABAIXO
-			Builder builder = KeyStore.Builder.newInstance("PKCS11", p, new KeyStore.PasswordProtection("senha".toCharArray()));
+			Builder builder = Builder.newInstance("PKCS11", p, new KeyStore.PasswordProtection("senha".toCharArray()));
 			KeyStore ks;
 			ks = builder.getKeyStore();
 
@@ -341,13 +341,13 @@ public class CAdESSignerTest {
 			signer.setCertificates(ks.getCertificateChain(alias));
 
 			// gera o hash do arquivo
-			java.security.MessageDigest md = java.security.MessageDigest
+			MessageDigest md = MessageDigest
 				.getInstance(DigestAlgorithmEnum.SHA_512.getAlgorithm());
 
 			// devido a uma restrição do token branco, no windws só funciona com 256
 			String varSO = System.getProperty("os.name");
 			if (varSO.contains("indows")) {
-				md = java.security.MessageDigest.getInstance(DigestAlgorithmEnum.SHA_256.getAlgorithm());
+				md = MessageDigest.getInstance(DigestAlgorithmEnum.SHA_256.getAlgorithm());
 			}
 
 			byte[] hash = Base64.decodeBase64("dvlpOKVdXfIrnWqTVRyMcElaRRcbSqXokpISZxawfoU\\u003d");
@@ -634,12 +634,12 @@ public class CAdESSignerTest {
 
 
 			// gera o hash do arquivo
-			java.security.MessageDigest md = java.security.MessageDigest
+			MessageDigest md = MessageDigest
 				.getInstance(DigestAlgorithmEnum.SHA_512.getAlgorithm());
 			// devido a uma restrição do token branco, no windws só funciona com 256
 			String varSO = System.getProperty("os.name");
 			if (varSO.contains("indows")) {
-				md = java.security.MessageDigest.getInstance(DigestAlgorithmEnum.SHA_256.getAlgorithm());
+				md = MessageDigest.getInstance(DigestAlgorithmEnum.SHA_256.getAlgorithm());
 			}
 
 
