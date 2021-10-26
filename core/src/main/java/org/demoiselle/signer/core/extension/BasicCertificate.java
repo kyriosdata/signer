@@ -556,7 +556,9 @@ public class BasicCertificate {
 	}
 
 	/**
-	 * @return A list of ulrs that inform the location of the certificate revocation lists
+	 * Get a list of urls.
+	 *
+	 * @return A list of ulrs that inform the location of the CRLs.
 	 * @throws IOException exception
 	 */
 	public List<String> getCRLDistributionPoint() throws IOException {

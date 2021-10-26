@@ -1,6 +1,6 @@
 /*
  * Demoiselle Framework
- * Copyright (C) 2016 SERPRO
+ * Copyright (C) 2021 SERPRO
  * ----------------------------------------------------------------------------
  * This file is part of Demoiselle Framework.
  *
@@ -35,24 +35,14 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-package org.demoiselle.signer.core;
+package org.demoiselle.signer.core.extension;
 
-import org.demoiselle.signer.core.exception.CertificateValidatorCRLException;
-import org.demoiselle.signer.core.exception.CertificateValidatorException;
+import org.junit.Test;
 
-import java.security.cert.X509Certificate;
+public class BasicCertificateTest {
 
-/**
- *
- * Define an operation to validate a {@link X509Certificate}.
- *
- */
-public interface IValidator {
+	@Test
+	public void construtor() {
 
-	/**
-	 *
-	 * @param x509 java.security.cert.X509Certificate
-	 * @throws CertificateValidatorException when validation fails
-	 */
-	void validate(X509Certificate x509) throws CertificateValidatorException, CertificateValidatorCRLException;
+	}
 }

@@ -47,7 +47,7 @@ import org.demoiselle.signer.core.exception.CertificateValidatorException;
 import org.demoiselle.signer.core.util.MessagesBundle;
 
 /**
- * check if a Certificate is out of date
+ * Check if a certificate is out of date.
  */
 public class PeriodValidator implements IValidator {
 
