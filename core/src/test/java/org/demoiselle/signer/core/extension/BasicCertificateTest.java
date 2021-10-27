@@ -41,14 +41,14 @@ import org.junit.Test;
 
 import java.io.InputStream;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 public class BasicCertificateTest {
 
 	private BasicCertificate bc;
 
 	public BasicCertificateTest() throws Exception {
+		// Certificado de autoridade certificadora (AC)
 		InputStream is = this.getClass().getResourceAsStream("/actest.cer");
 		bc = new BasicCertificate(is);
 	}
@@ -81,5 +81,13 @@ public class BasicCertificateTest {
 		assertTrue(keyUsage.isKeyCertSign());
 		assertTrue(keyUsage.isKeyEncipherment());
 		assertTrue(keyUsage.isDataEncipherment());
+	}
+
+	@Test
+	public void subjectAlternativeName() {
+		ICPBRSubjectAlternativeNames an = bc.getICPBRSubjectAlternativeNames();
+		assertFalse(an.isCertificatePF());
+		assertFalse(an.isCertificatePJ());
+		assertFalse(an.isCertificateEquipment());
 	}
 }
