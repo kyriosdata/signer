@@ -39,10 +39,47 @@ package org.demoiselle.signer.core.extension;
 
 import org.junit.Test;
 
+import java.io.InputStream;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+
 public class BasicCertificateTest {
 
-	@Test
-	public void construtor() {
+	private BasicCertificate bc;
 
+	public BasicCertificateTest() throws Exception {
+		InputStream is = this.getClass().getResourceAsStream("/actest.cer");
+		bc = new BasicCertificate(is);
+	}
+
+	@Test
+	public void distinguishedNames() throws Exception {
+		ICPBR_DN cidn = bc.getCertificateIssuerDN();
+		assertEquals("Fake CA", cidn.getProperty("CN"));
+		assertEquals("ICP-Brasil", cidn.getProperty("O"));
+		assertEquals("BR", cidn.getProperty("C"));
+	}
+
+	@Test
+	public void getNotBeforeDate() {
+		String dataString = bc.getBeforeDate().toString();
+		assertEquals("Tue Oct 26 19:15:39 BRT 2021", dataString);
+	}
+
+	@Test
+	public void getNotAfterDate() {
+		String dataString = bc.getAfterDate().toString();
+		assertEquals("Thu Oct 19 19:15:39 BRT 2051", dataString);
+	}
+
+	@Test
+	public void keyUsage() {
+		ICPBRKeyUsage keyUsage = bc.getICPBRKeyUsage();
+		assertTrue(keyUsage.isCRLSign());
+		assertTrue(keyUsage.isDigitalSignature());
+		assertTrue(keyUsage.isKeyCertSign());
+		assertTrue(keyUsage.isKeyEncipherment());
+		assertTrue(keyUsage.isDataEncipherment());
 	}
 }

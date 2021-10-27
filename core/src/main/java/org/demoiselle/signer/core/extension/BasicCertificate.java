@@ -144,6 +144,7 @@ public class BasicCertificate {
 	}
 
 	/**
+	 * FIXME conversion to hexadecimal repeated in many places
 	 * @param bi Big Integer
 	 * @return String string representation
 	 */
@@ -215,10 +216,12 @@ public class BasicCertificate {
 		if (certificateFor == null) {
 			certificateFor = new ICPBR_DN(certificate.getSubjectDN().getName());
 		}
+
 		return certificateFor;
 	}
 
 	/**
+	 * FIXME maybe this should be in ICPBR_DN
 	 * Returns the name that was defined on CN for CertificateSubjectDN.<br>
 	 * Its similar to CertificateSubjectDN.getProperty("CN"), but ignoring<br>
 	 * the information after ":".<br>
@@ -226,7 +229,6 @@ public class BasicCertificate {
 	 * @return String name
 	 * @deprecated spelling mistake, use getName
 	 */
-
 	public String getNome() {
 		try {
 			String nome = this.getCertificateSubjectDN().getProperty("CN");
@@ -244,6 +246,7 @@ public class BasicCertificate {
 	}
 
 	/**
+	 * FIXME implementation is just "return getNome()"
 	 * Returns the name that was defined on CN for CertificateSubjectDN.<br>
 	 * Its similar to CertificateSubjectDN.getProperty("CN"), but ignoring<br>
 	 * the information after ":".<br>

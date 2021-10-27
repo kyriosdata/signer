@@ -40,7 +40,7 @@ package org.demoiselle.signer.core.extension;
 import java.security.cert.X509Certificate;
 
 /**
- * ICP-BRASIL's definitions of Key Usage
+ * ICP-BRASIL's definitions of Key Usage.
  */
 public class ICPBRKeyUsage {
 
@@ -59,14 +59,17 @@ public class ICPBRKeyUsage {
 	private final boolean[] keyUsage;
 
 	/**
-	 * @param cert X509Certificate
+	 * Creates an instance that details key usage for the certificate.
+	 *
+	 * @param cert {@link X509Certificate} whose key usage is investigated.
 	 */
 	public ICPBRKeyUsage(X509Certificate cert) {
 		this.keyUsage = cert.getKeyUsage();
 	}
 
 	/**
-	 * Fake.
+	 * Returns {@code true} if certificate is for sign digital
+	 * documents.
 	 *
 	 * @return Fake boolean.
 	 */
