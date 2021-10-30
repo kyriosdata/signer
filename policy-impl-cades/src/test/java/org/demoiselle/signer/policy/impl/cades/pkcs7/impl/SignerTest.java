@@ -69,7 +69,6 @@ import static org.junit.Assume.assumeNotNull;
 public class SignerTest {
 
 	public static final String CONTEUDO = "saúde";
-	public static final String SENHA = "changeit";
 
 	/**
 	 * Teste com conteúdo anexado
@@ -84,7 +83,7 @@ public class SignerTest {
 
 		try {
 			byte[] contentToSign = CONTEUDO.getBytes(StandardCharsets.UTF_8);
-			char[] senha = SENHA.toCharArray();
+			char[] senha = certificadoSenha.toCharArray();
 
 			KeyStore ks = KeyStore.getInstance("JKS");
 
@@ -97,21 +96,10 @@ public class SignerTest {
 			signer.setCertificates(ks.getCertificateChain(alias));
 
 			// para token
-			signer.setPrivateKey((PrivateKey) ks.getKey(alias, SENHA.toCharArray()));
-
-			// para arquivo
-			// signer.setPrivateKey((PrivateKey) ks.getKey(alias, senha));
-			// politica sem carimbo de tempo
+			signer.setPrivateKey((PrivateKey) ks.getKey(alias, senha));
 			signer.setSignaturePolicy(PolicyFactory.Policies.AD_RB_CADES_2_3);
-
-			// para mudar o algoritimo
 			signer.setAlgorithm(SignerAlgorithmEnum.SHA512withRSA);
-			String varSO = System.getProperty("os.name");
-			if (varSO.contains("indows")) {
-				signer.setAlgorithm(SignerAlgorithmEnum.SHA256withRSA);
-			}
 
-			// Com conteudo atachado
 			byte[] p7s = signer.doDetachedSign(contentToSign);
 			File file = new File("assinatura.p7s");
 			FileOutputStream os = new FileOutputStream(file);
