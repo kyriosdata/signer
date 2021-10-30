@@ -119,6 +119,8 @@ public class RevocationValues implements UnsignedAttribute {
     public Attribute getValue() throws SignerException {
     	List<X509CRL> crlList = new ArrayList<X509CRL>();
     	ArrayList<CertificateList> crlVals = new ArrayList<CertificateList>();
+
+		// FIXME only size always zero is used
     	List<BasicOCSPResponse> ocspVals = new ArrayList<BasicOCSPResponse>();
     	try {
 

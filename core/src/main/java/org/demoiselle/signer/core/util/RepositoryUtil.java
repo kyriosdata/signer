@@ -75,8 +75,10 @@ public class RepositoryUtil {
 	public static String urlToMD5(String url) {
 		try {
 			String ret = "";
+			// FIXME hash should be reused Hash.md5()
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(url.getBytes(), 0, url.length());
+			// FIXME conversion to hex should use reused function
 			for (byte b : md.digest()) ret = ret + String.format("%02x", b);
 			return ret;
 		} catch (NoSuchAlgorithmException e) {

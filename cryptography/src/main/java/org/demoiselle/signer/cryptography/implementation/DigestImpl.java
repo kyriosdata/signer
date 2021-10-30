@@ -98,7 +98,7 @@ public class DigestImpl implements Digest {
 			MessageDigest md = MessageDigest.getInstance(this.algorithm);
 			FileInputStream fileIS = new FileInputStream(file);
 			BufferedInputStream bis = new BufferedInputStream(fileIS);
-			// FIXME no need for this extra brocker DataInputStream
+			// FIXME no need for this extra broker DataInputStream
 			DataInputStream dis = new DataInputStream(bis);
 			DigestInputStream digin = new DigestInputStream(dis, md);
 			byte[] buffer = new byte[BUFSIZE];
@@ -142,6 +142,7 @@ public class DigestImpl implements Digest {
 			int halfbyte = (data[i] >>> 4) & 0x0F;
 			int two_halfs = 0;
 			do {
+				// FIXME >>> 4 & 0x0F will always >= 0
 				if ((0 <= halfbyte) && (halfbyte <= 9))
 					buf.append((char) ('0' + halfbyte));
 				else

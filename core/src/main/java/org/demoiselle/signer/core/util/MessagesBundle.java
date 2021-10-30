@@ -43,7 +43,9 @@ import java.util.ResourceBundle;
 
 /**
  *
- *  Custom Messages Bundle implementation to allows parameterization
+ *  Custom Messages Bundle implementation to allows parameterization.
+ *
+ *  FIXME this is used by many classes all of them can subclass a new class with this functionality.
  *
  */
 public class MessagesBundle {

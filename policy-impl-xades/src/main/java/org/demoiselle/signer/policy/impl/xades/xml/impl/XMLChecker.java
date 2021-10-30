@@ -906,6 +906,7 @@ public class XMLChecker implements Checker {
 					verifySignature(signatureTag, cert);
 					verifyHash(signatureTag, signatureInfoTag, signatureValue, cert);
 
+					// FIXME encapsulation broken should use Collection
 					LinkedList<X509Certificate> varChain = (LinkedList<X509Certificate>) CAManager.getInstance()
 						.getCertificateChain(cert);
 					sigInf.setIcpBrasilcertificate(new BasicCertificate(cert));

@@ -109,9 +109,8 @@ public class DocumentUtils {
 	 * @return the document.
 	 */
 	public static Document loadXMLDocument(String xmlFile) throws XMLSignerException {
-
-
 		try {
+			// FIXME FileReader is not closed
 			BufferedReader in = new BufferedReader(new FileReader(xmlFile));
 			InputSource source = new InputSource(in);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
