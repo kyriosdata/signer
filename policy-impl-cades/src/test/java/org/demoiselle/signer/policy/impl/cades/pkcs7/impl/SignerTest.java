@@ -41,17 +41,27 @@ import org.demoiselle.signer.policy.engine.factory.PolicyFactory;
 import org.demoiselle.signer.policy.impl.cades.SignerAlgorithmEnum;
 import org.demoiselle.signer.policy.impl.cades.factory.PKCS7Factory;
 import org.demoiselle.signer.policy.impl.cades.pkcs7.PKCS7Signer;
-import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.security.*;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.Enumeration;
 
+import org.junit.Test;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeNotNull;
 
 /**
  *
@@ -66,13 +76,18 @@ public class SignerTest {
 	 */
 	@Test
 	public void testSignAttached() {
+		String certificadoFile = System.getenv("CERTIFICADO_TESTE");
+		String certificadoSenha = System.getenv("CERTIFICADO_SENHA");
+
+		assumeNotNull(certificadoFile);
+		assumeNotNull(certificadoSenha);
+
 		try {
 			byte[] contentToSign = CONTEUDO.getBytes(StandardCharsets.UTF_8);
 			char[] senha = SENHA.toCharArray();
 
 			KeyStore ks = KeyStore.getInstance("JKS");
 
-			String certificadoFile = System.getenv("RNDS_CERTIFICADO_ENDERECO");
 			InputStream is = new FileInputStream(certificadoFile);
 			ks.load(is, senha);
 
@@ -97,7 +112,7 @@ public class SignerTest {
 			}
 
 			// Com conteudo atachado
-			byte[] p7s = signer.doAttachedSign(contentToSign);
+			byte[] p7s = signer.doDetachedSign(contentToSign);
 			File file = new File("assinatura.p7s");
 			FileOutputStream os = new FileOutputStream(file);
 			os.write(p7s);
