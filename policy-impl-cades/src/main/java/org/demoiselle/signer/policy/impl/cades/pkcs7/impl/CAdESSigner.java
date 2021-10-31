@@ -386,12 +386,13 @@ public class CAdESSigner implements PKCS7Signer {
 		ASN1EncodableVector signedAttributes = new ASN1EncodableVector();
 
 		// logger.info(cadesMessagesBundle.getString("info.signed.attribute"));
-		if (signaturePolicy.getSignPolicyInfo().getSignatureValidationPolicy().getCommonRules()
-				.getSignerAndVeriferRules().getSignerRules().getMandatedSignedAttr().getObjectIdentifiers() != null) {
-			for (ObjectIdentifier objectIdentifier : signaturePolicy.getSignPolicyInfo().getSignatureValidationPolicy()
-					.getCommonRules().getSignerAndVeriferRules().getSignerRules().getMandatedSignedAttr()
-					.getObjectIdentifiers()) {
+		Collection<ObjectIdentifier> identifiers = signaturePolicy
+			.getSignPolicyInfo().getSignatureValidationPolicy()
+			.getCommonRules().getSignerAndVeriferRules()
+			.getSignerRules().getMandatedSignedAttr().getObjectIdentifiers();
 
+		if (identifiers != null) {
+			for (ObjectIdentifier objectIdentifier : identifiers) {
 				SignedOrUnsignedAttribute signedOrUnsignedAttribute = attributeFactory
 						.factory(objectIdentifier.getValue());
 				signedOrUnsignedAttribute.initialize(this.pkcs1.getPrivateKey(), certificateChain, content,

@@ -78,15 +78,18 @@ public class SignerTest {
 		String certificadoFile = System.getenv("CERTIFICADO_TESTE");
 		String certificadoSenha = System.getenv("CERTIFICADO_SENHA");
 
-		assumeNotNull(certificadoFile);
-		assumeNotNull(certificadoSenha);
+//		String certificadoFile = "/icpbrasil.jks";
+//		String certificadoSenha = "changeit";
+
+		assumeNotNull(certificadoFile, certificadoSenha);
 
 		try {
 			byte[] contentToSign = CONTEUDO.getBytes(StandardCharsets.UTF_8);
 			char[] senha = certificadoSenha.toCharArray();
 
-			KeyStore ks = KeyStore.getInstance("JKS");
+			KeyStore ks = KeyStore.getInstance("pkcs12");
 
+			//InputStream is = this.getClass().getResourceAsStream(certificadoFile);
 			InputStream is = new FileInputStream(certificadoFile);
 			ks.load(is, senha);
 
@@ -100,7 +103,7 @@ public class SignerTest {
 			signer.setSignaturePolicy(PolicyFactory.Policies.AD_RB_CADES_2_3);
 			signer.setAlgorithm(SignerAlgorithmEnum.SHA512withRSA);
 
-			byte[] p7s = signer.doDetachedSign(contentToSign);
+			byte[] p7s = signer.doAttachedSign(contentToSign);
 			File file = new File("assinatura.p7s");
 			FileOutputStream os = new FileOutputStream(file);
 			os.write(p7s);
