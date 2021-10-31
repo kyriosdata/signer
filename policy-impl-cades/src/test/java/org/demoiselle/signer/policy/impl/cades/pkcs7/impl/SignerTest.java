@@ -78,9 +78,6 @@ public class SignerTest {
 		String certificadoFile = System.getenv("CERTIFICADO_TESTE");
 		String certificadoSenha = System.getenv("CERTIFICADO_SENHA");
 
-//		String certificadoFile = "/icpbrasil.jks";
-//		String certificadoSenha = "changeit";
-
 		assumeNotNull(certificadoFile, certificadoSenha);
 
 		try {
