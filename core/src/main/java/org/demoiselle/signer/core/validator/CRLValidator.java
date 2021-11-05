@@ -49,7 +49,7 @@ import org.demoiselle.signer.core.repository.CRLRepositoryFactory;
 import org.demoiselle.signer.core.util.MessagesBundle;
 
 /**
- * Verify if a certificate is part of a revocation list (CRL).
+ * Verify if a certificate is part of a certificate revocation list (CRL).
  *
  * <p>A certificate revocation list (CRL) is a list of
  * digital certificates that have been revoked by the
