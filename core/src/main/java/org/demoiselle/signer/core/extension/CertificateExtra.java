@@ -59,12 +59,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
+<<<<<<< HEAD
  * Certification extension (Subject Alternative Name) defined
  * by ICP-Brasil.
  *
  * <p>Extra Informations for ICP-BRASIL (DOC-ICP-04) Certificates.
  * Abstracts the rules to "PESSOA FISICA", "PESSOA JURIDICA" and
  * "EQUIPAMENTO/APLICAÇÃO".</p>
+=======
+ * Provide access to extra information for ICP-Brasil certificates.
+ *
+ * @see BasicCertificate
+>>>>>>> demoiselle-master
  */
 public class CertificateExtra {
 
