@@ -58,6 +58,8 @@ public class XMLUtil {
 	public static Document loadXMLDocument(InputStream parmIS) throws RuntimeException {
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		// FIXME security concern
+		// factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 		DocumentBuilder dBuilder = null;
 		Document docReturn = null;
 		try {

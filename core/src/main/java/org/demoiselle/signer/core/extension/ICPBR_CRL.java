@@ -50,7 +50,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * ICP-BRASIL's definitions of Certificate revocation list (CRL) on java.security.cert.X509CRL format
+<<<<<<< HEAD
+ * ICP-BRASIL's definitions of Certificate revocation list (CRL)
+=======
+ * ICP-BRASIL's definitions of Certificate Revocation List (CRL)
+>>>>>>> demoiselle-master
+ * on {@link X509CRL} format.
  */
 public class ICPBR_CRL {
 

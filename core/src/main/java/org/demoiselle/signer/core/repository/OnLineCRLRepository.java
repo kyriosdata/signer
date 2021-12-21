@@ -112,6 +112,7 @@ public class OnLineCRLRepository implements CRLRepository {
 
 	private ICPBR_CRL getICPBR_CRL(String uRLCRL) {
 		try {
+			// FIXME load from url (it is all over the code)
 			URL url = new URL(uRLCRL);
 			URLConnection conexao = url.openConnection(proxy);
 			conexao.setConnectTimeout(5000);

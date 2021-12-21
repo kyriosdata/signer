@@ -45,11 +45,11 @@ import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 
 /**
- * ICP-BRASIL's definitions of Subject Alternative Names
+ * ICP-BRASIL's definitions of Subject Alternative Names.
  */
 public class ICPBRSubjectAlternativeNames {
 
-	private String email = null;
+	private String email;
 	private String dns = null;
 	private ICPBRCertificatePF icpBrCertPF = null;
 	private ICPBRCertificatePJ icpBrCertPJ = null;

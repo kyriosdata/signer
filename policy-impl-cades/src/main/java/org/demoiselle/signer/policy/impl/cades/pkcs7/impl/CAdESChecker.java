@@ -185,11 +185,11 @@ public class CAdESChecker implements PKCS7Checker {
 				try {
 					cV.validate(varCert);
 				} catch (CertificateValidatorCRLException cvce) {
-					signatureInfo.getValidatorErrors().add(cadesMessagesBundle.getString("error.clr.not.access",cvce.getMessage()));
-					logger.debug(cadesMessagesBundle.getString("error.clr.not.access",cvce.getMessage()));
+					signatureInfo.getValidatorErrors().add(cadesMessagesBundle.getString("error.crl.not.access",cvce.getMessage()));
+					logger.debug(cadesMessagesBundle.getString("error.crl.not.access",cvce.getMessage()));
 				} catch (CertificateRevocationException cre) {
-					signatureInfo.getValidatorErrors().add(cadesMessagesBundle.getString("error.clr.not.access",cre.getMessage()));
-					logger.error(cadesMessagesBundle.getString("error.clr.not.access",cre.getMessage()));
+					signatureInfo.getValidatorErrors().add(cadesMessagesBundle.getString("error.crl.not.access",cre.getMessage()));
+					logger.error(cadesMessagesBundle.getString("error.crl.not.access",cre.getMessage()));
 				}
 
 				PeriodValidator pV = new PeriodValidator();
@@ -217,6 +217,7 @@ public class CAdESChecker implements PKCS7Checker {
 				logger.debug(cadesMessagesBundle.getString("info.signed.attribute"));
 				String varOIDPolicy = PKCSObjectIdentifiers.id_aa_ets_sigPolicyId.getId();
 				AttributeTable signedAttributes = signerInfo.getSignedAttributes();
+				// FIXME useless signedAttributes != null
 				if ((signedAttributes == null) || (signedAttributes != null && signedAttributes.size() == 0)) {
 					signatureInfo.getValidatorWarnins().add(cadesMessagesBundle.getString("error.signed.attribute.table.not.found"));
 					logger.warn(cadesMessagesBundle.getString("error.signed.attribute.table.not.found"));
@@ -337,6 +338,7 @@ public class CAdESChecker implements PKCS7Checker {
 					}
 				}
 
+				// FIXME broken encapsulation should use Collection
 				LinkedList<X509Certificate> varChain = (LinkedList<X509Certificate>) CAManager.getInstance().getCertificateChain(varCert);
 				// menor que 2 = autoAssinado
 				if (varChain.size() < 2) {

@@ -55,9 +55,11 @@ import sun.security.util.DerValue;
 import sun.security.x509.OtherName;
 
 /**
+ *
  * Generic Class for treatment of some attributes of certificates of ICP-BRASIL,
  * for: Individual (Pessoa Física) of the Business Entity (Pessoa Jurídica) and Equipment.
  * In accordance with the standards defined in DOC-ICP-04 v2.0 dated 04/18/2006.
+ * FIXME check for DOC-ICP 20/10/2020 https://www.in.gov.br/web/dou/-/resolucao-cg-icp-brasil-no-179-de-20-de-outubro-de-2020-284449391
  */
 @SuppressWarnings("restriction")
 public class OIDGeneric {

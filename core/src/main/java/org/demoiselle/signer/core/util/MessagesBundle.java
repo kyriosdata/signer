@@ -42,8 +42,14 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
+<<<<<<< HEAD
  *
- *  Custom Messages Bundle implementation to allows parameterization
+ *  Custom Messages Bundle implementation to allows parameterization.
+ *
+ *  FIXME this is used by many classes all of them can subclass a new class with this functionality.
+=======
+ * Custom Messages Bundle implementation to allows parameterization.
+>>>>>>> demoiselle-master
  *
  */
 public class MessagesBundle {

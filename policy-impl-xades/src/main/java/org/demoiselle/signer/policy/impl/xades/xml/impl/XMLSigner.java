@@ -256,7 +256,7 @@ public class XMLSigner implements Signer {
 	}
 
 	/**
-	 * Generates a destached XML signature from byte array.
+	 * Generates a destached XML signature from informed File.
 	 *
 	 * @param isFile the input stream.
 	 * @param fileNameToSign the filename of content to sign.
@@ -298,6 +298,7 @@ public class XMLSigner implements Signer {
 		}
 		try {
 			InputStream inputStream = new FileInputStream(fileNameToSign);
+			// FIXME try-with-resources or finally to close inputStream
 			byte[] fileContent = IOUtils.toByteArray(inputStream);
 			return signDetachedEnveloped(fileContent, Paths.get(fileNameToSign).getFileName().toString());
 		} catch (IOException e) {
@@ -388,6 +389,7 @@ public class XMLSigner implements Signer {
 		}
 
 		// Completa os certificados ausentes da cadeia, se houver
+		// FIXME this.certificateChain != null is true given the condition above
 		if (this.certificate == null && this.certificateChain != null && this.certificateChain.length > 0) {
 			this.certificate = (X509Certificate) this.certificateChain[0];
 		}
@@ -398,7 +400,7 @@ public class XMLSigner implements Signer {
 			logger.error(xadesMessagesBundle.getString("error.no.ca", this.certificate.getIssuerDN()));
 			throw new XMLSignerException(xadesMessagesBundle.getString("error.no.ca", this.certificate.getIssuerDN()));
 		}
-		
+
 		try {
 			new CertificateManager(this.certificate);
 		}catch (CertificateValidatorCRLException cvre) {
@@ -535,7 +537,9 @@ public class XMLSigner implements Signer {
 	}
 
 	/**
-	 * get a Hash Digest for Certificate
+	 * Get a hash digest for a certificate.
+	 * FIXME this is a general function should go to a specific class?
+	 * FIXME Hash.sha512() to get a corresponding hash function, for instance
 	 *
 	 * @param cert
 	 * @param algorithm
@@ -961,7 +965,9 @@ public class XMLSigner implements Signer {
 		return signatureTimeStamp;
 	}
 
+	// FIXME remove not used method?
 	public void saveSignedDocument(String fileName) throws TransformerException, FileNotFoundException {
+		// FIXME try-with-resources for finally to close
 		OutputStream os = new FileOutputStream(fileName);
 		TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer trans = tf.newTransformer();

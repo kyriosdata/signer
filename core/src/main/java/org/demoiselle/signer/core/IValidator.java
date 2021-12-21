@@ -44,7 +44,7 @@ import java.security.cert.X509Certificate;
 
 /**
  *
- * Define a method to validate a {@link X509Certificate}.
+ * Define an operation to validate a {@link X509Certificate}.
  *
  */
 public interface IValidator {

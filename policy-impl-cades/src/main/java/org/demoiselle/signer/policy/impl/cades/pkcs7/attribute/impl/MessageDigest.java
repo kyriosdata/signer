@@ -56,6 +56,7 @@ import org.slf4j.LoggerFactory;
  * defined in the policy. If the attribute hash was setted on
  * initialized method, it will be used instead of calculating
  * from the content.
+ * FIXME change name Digest
  */
 public class MessageDigest implements SignedAttribute {
 

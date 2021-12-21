@@ -39,8 +39,12 @@ package org.demoiselle.signer.cryptography;
 
 /**
  * FIXME maybe a better name is just DigestAlgorithm
- * Defines the Digest algorithms,
- * according to the standard defined by the Brazilian public key infrastructure (ICP-Brasil).
+ * FIXME remove hash functions not used by ICP-Brasil?
+ * Defines the digest algorithms according to the standard defined
+ * by the Brazilian public key infrastructure (ICP-Brasil).
+ *
+ * <p>According to <a href="Padrões e Algoritmos Criptográficos da ICP-Brasil">ICP-Brasil</a>,
+ * the algoritms used for hash are: SHA-1, SHA-256, SHA-512 and SHAKE-256.</p>
  */
 public enum DigestAlgorithmEnum {
 
@@ -74,7 +78,7 @@ public enum DigestAlgorithmEnum {
 	 * The passed parameter must be equal (case insensitive)
 	 * to the algorithm name of any item in this enumeration, otherwise it will return null.
 	 *
-	 * @param algorithm algorithm name
+	 * @param algorithm algorithm name.
 	 * @return algorithm representation
 	 */
 	public static DigestAlgorithmEnum getDigestAlgorithmEnum(String algorithm) {

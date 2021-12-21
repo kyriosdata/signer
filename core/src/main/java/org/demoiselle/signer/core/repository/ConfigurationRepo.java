@@ -299,7 +299,7 @@ public class ConfigurationRepo {
 	}
 
 	/**
-	 * Gets the location where the revoked certificate lists index file is stored
+	 * Gets the location where the CRL index file is available.
 	 *
 	 * @return location of CRL index file, default is .crl_index
 	 */

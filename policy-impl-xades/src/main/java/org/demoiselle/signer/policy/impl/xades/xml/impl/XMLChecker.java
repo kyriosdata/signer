@@ -656,7 +656,7 @@ public class XMLChecker implements Checker {
 			validationErrors.add(cvce.getMessage());
 			logger.error(cvce.getMessage());
 		} catch (CertificateRevocationException cre) {
-			validationErrors.add(xadesMessagesBundle.getString("error.certificate.repelead", cre.getMessage()));
+			validationErrors.add(xadesMessagesBundle.getString("error.certificate.repealed", cre.getMessage()));
 			logger.error("certificado revogado");
 		}
 
@@ -906,6 +906,7 @@ public class XMLChecker implements Checker {
 					verifySignature(signatureTag, cert);
 					verifyHash(signatureTag, signatureInfoTag, signatureValue, cert);
 
+					// FIXME encapsulation broken should use Collection
 					LinkedList<X509Certificate> varChain = (LinkedList<X509Certificate>) CAManager.getInstance()
 						.getCertificateChain(cert);
 					sigInf.setIcpBrasilcertificate(new BasicCertificate(cert));
